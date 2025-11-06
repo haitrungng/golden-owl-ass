@@ -77,7 +77,7 @@ export default function Home() {
       </div>
 
       {/* SUMMARY */}
-      <div className='flex flex-col md:flex-row justify-center gap-6 pt-10'>
+      <div className='flex flex-col lg:flex-row justify-center gap-6 pt-6'>
         <div className='flex-1'>
           {averageStats ? (
             <AverageBarChart stats={averageStats} />
@@ -170,17 +170,17 @@ export default function Home() {
           </CardFooter>
         </Card>
 
-        <div className='flex flex-row items-center justify-between gap-5 md:flex-col'>
-          <Card className='w-fit p-6'>
+        <div className='flex items-center justify-between gap-5 flex-col'>
+          <Card className='w-3xs p-6'>
             <p className='text-center'>Tổng thí sinh có điểm</p>
             <p className='text-center text-chart-3 font-bold text-5xl'>
               {totalCandidates}
             </p>
-            <p className='text-center text-muted-foreground text-sm'>
+            <p className='text-center text-muted-foreground texw-xs'>
               Dữ liệu năm 2024
             </p>
           </Card>
-          <Card className='w-full p-6'>
+          <Card className='w-3xs p-6'>
             <p className='text-center'>Kiểm tra điểm ngay</p>
             <Button
               className='mt-2'
@@ -191,7 +191,7 @@ export default function Home() {
               Tra cứu điểm
             </Button>
           </Card>
-          <Card className='w-fit p-6'>
+          <Card className='w-3xs p-6'>
             <p className='text-center'>Xem thêm thông tin chi tiết</p>
             <Button
               className='mt-2'

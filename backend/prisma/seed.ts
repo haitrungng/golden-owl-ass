@@ -8,7 +8,7 @@ const prisma = new PrismaClient();
 async function main() {
   const filePath = path.join(__dirname, './dataset/diem_thi_thpt_2024.csv');
   const content = fs.readFileSync(filePath, 'utf8');
-  const lines = content.trim().split('\n');
+  const lines = content.split(/\r?\n/).filter((l) => l.length > 0);
 
   const headers = lines[0].split(','); // ["sbd","toan","ngu_van",...]
 

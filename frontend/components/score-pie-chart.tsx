@@ -51,7 +51,7 @@ export function ScoreDistributionPie({
 }: ScorePieProps) {
   if (!stats) {
     return (
-      <Card className='flex flex-col min-w-md'>
+      <Card className='flex flex-col w-full bg:min-w-md'>
         <CardHeader className='items-center pb-0'>
           <CardTitle>
             <div className='flex items-center justify-between'>
@@ -100,7 +100,7 @@ export function ScoreDistributionPie({
   ];
 
   return (
-    <Card className='flex flex-col min-w-md'>
+    <Card className='flex flex-col w-full bg:min-w-md'>
       <CardHeader className='items-center pb-0'>
         <CardTitle>
           <div className='flex items-center justify-between'>

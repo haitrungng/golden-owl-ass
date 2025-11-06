@@ -1,65 +1,185 @@
 # G-Scores
 
-This is the instruction for web developer intern assignment at [Golden Owl](https://goldenowl.asia). You will build a simple web.
+Dear **HR team** and **Developer team** at **Golden Owl**,
 
-Web template example. Hope you will make it more beautiful !!!
+I truly appreciate the opportunity to apply and showcase my technical skills through this project.  
+Thank you for taking the time to interview me and review my source code!
 
-![template example](./screenshots/mockup-ui.png) 
-# Requirements
-1. From the raw data file ([diem_thi_thpt_2024.csv](./dataset/diem_thi_thpt_2024.csv)) save it into the database with the appropriate structure
+---
 
-2. Your application should have at least features in [Must have](#must-have), things in [Nice to have](#nice-to-have) is optional (but yeah, it's attractive if you have).
+## Overview
 
-### Must have:
-- The conversion of raw data into the database must be coded and located in this source code. (**hint**: recommend use migration and seeder)
-- Write a feature to check score from registration number input
-- Write a feature report. There will be 4 levels including: >=8 points, 8 points > && >=6 points, 6 points > && >= 4 points, < 4 points
-    - Statistics of the number of students with scores in the above 4 levels by subjects. (Chart)
-- List top 10 students of group A including (math, physics, chemistry)
-### Nice to have:
+This is [recorded videos](https://www.loom.com/looms/videos) for G-Scores project
 
-- Responsive design (look good on all devices: desktops, tablets & mobile phones).
-- Setup project use Docker.
-- Deploy the application to go live.
+**G-Scores** is a full-stack web application that allows users to:
 
-# Technical Requirements
+- Look up student exam results by registration number (SBD).
+- Analyze and visualize score distributions.
+- Generate statistical reports by subject and academic block (A, B, C, D, ...).
+- View key performance metrics through an interactive dashboard.
 
-### Frontend
-You can use any front-end library/framework like React, Angular, Vue, ... or just simple things with HTML + CSS + Javascript (JQuery).
-- For JS intern use React you need to have: 
-  * React Hooks
-- Fonts (optional);
-  - [https://fonts.google.com/specimen/Rubik?query=Rubik](https://fonts.google.com/specimen/Rubik?query=Rubik)
-- You can use some available interfaces such as: [AdminLTe](https://adminlte.io/), [TailAdmin](https://tailadmin.com/)...
-  
-### Backend: 
-Choose one of your applied back-end libraries/frameworks: Maybe Laravel(PHP), Ruby on Rails, NestJS (NodeJs), Django (Python), unlimited framework... or a structure that you come up with yourselt. 
-- **Mandatory** use of **OOP programming** for managing subjects.
-- Need form validation and logic tightening.
-- For NodeJs, use TypeScript is a plus.
-- Use ORM for interacting with Database.
-- Database: You can use postgreSQL, Mysql, mongoDB... to manage or cache the data. 
+This project includes both a **frontend (Next.js)** and a **backend (NestJS + Prisma + PostgreSQL)**.
 
-### Deployment
-Some providers allow free deployment for the trial version  (note: Maybe some suppliers will update their policies and prices)
+---
 
-- Heroku - https://heroku.com - Deploying Front & Backend
-- Vercel (Zeit) - https://vercel.com - Deploying Front & Backend apps at free of cost
-- Fly - https://fly.io - Deploying Front & Backend apps at free of cost
-- Deta - https://deta.sh - Deploying Node.js and Python apps and APIs. They support most web frameworks like Express, Koa, Flask, and FastAPI. They also provide a very fast and powerful NoSQL database for free.
-- Heliohost - https://heliohost.org - PHP, Ruby on rails, perl, django, java(jsp)
-- `...`
-# Submission
+## Frontend
 
-After completing the assignment, please push the source code to remote repository (github/gitlab), then send us the link to your repository.
+Built with **Next.js**, **TypeScript**, and **ShadCN/UI**, the frontend provides a clean, responsive, and user-friendly interface.
 
-Don't forget to add `README.md` which includes guide to run your project locally and demo link.
+### Features
 
+- **Search Scores Page:** Enter a student’s SBD to view individual scores.
+- **Dashboard:** Displays KPI cards (total candidates, average score, action cards).
+- **Reports Page:** Filter by block and analyze subject performance by four score ranges:
+  - ≥ 8 points
+  - 8 > points ≥ 6
+  - 6 > points ≥ 4
+  - < 4 points
+- **Responsive design** for mobile, tablet, and desktop.
+- **Form validation** with `react-hook-form` + `zod`, and customized UI built with **ShadCN** components.
 
-**GOOD LUCK!!!**
+---
 
-![Your Code Work](./screenshots/meme.png)
+## Backend
 
-# Contributors
+Developed with **NestJS**, **Prisma**, and **PostgreSQL**, the backend provides a structured REST API and efficient data handling.
 
-- Edric Cao (from GO)
+### Features
+
+- Fetch scores by SBD.
+- Generate score distribution reports (≥8, 6–<8, 4–<6, <4).
+- Calculate average scores for individual subjects or all 9 subjects in one query.
+- Retrieve Top 10 students by academic block (A, B, C, D, ...).
+- Count total candidates with at least one subject score (non-null).
+- Strong input validation using `class-validator`.
+
+---
+
+## Environment Variables
+
+### Backend (`backend/.env`)
+
+This is a sample file
+
+```bash
+DATABASE_URL="postgresql://user:password@localhost:5432/g_scores"
+PORT=8080
+CORS_ORIGIN=http://localhost:3000,http://localhost:3000
+```
+
+### Frontend (`frontend/.env`)
+
+This is a sample file
+
+```bash
+NEXT_PUBLIC_API_URL=http://localhost:8080
+```
+
+---
+
+## Setup Instructions
+
+### 1️. Clone the repository
+
+```bash
+git clone https://github.com/haitrungng/golden-owl-ass
+cd webdev-intern-assignment-3
+```
+
+### 2️. Backend setup
+
+```bash
+cd backend
+npm install
+npx prisma migrate dev
+npm run seed  #seed database
+npm run start:dev
+```
+
+### 3️. Frontend setup
+
+```bash
+cd ../frontend
+npm install
+npm run dev
+```
+
+---
+
+## Tech Stack
+
+| Layer            | Technologies                                                         |
+| ---------------- | -------------------------------------------------------------------- |
+| **Frontend**     | Next.js 14, TypeScript, TailwindCSS, ShadCN/UI, Zod, React Hook Form |
+| **Backend**      | NestJS, Prisma ORM, PostgreSQL                                       |
+| **Dev Tools**    | ESLint, Prettier, dotenv, Nodemon                                    |
+| **Architecture** | REST API, DTO validation, Prisma schema management                   |
+
+---
+
+## Key API Endpoints
+
+- score distribution: (≥8, 6–<8, 4–<6, <4)
+
+| Endpoint                                      | Method | Description                                                                          |
+| --------------------------------------------- | ------ | ------------------------------------------------------------------------------------ |
+| `/scores/search/:sbd`                         | GET    | Search student scores by SBD                                                         |
+| `/scores/report`                              | GET    | Get score distribution for all subjects                                              |
+| `/scores/report?subject=toan`                 | GET    | Get score distribution for a specific subject                                        |
+| `/scores/summary`                             | GET    | Get average scores for 9 subjects and total candidates with at least one valid score |
+| `/scores/top?block=A&limit=10`                | GET    | Get Top 10 students of block A                                                       |
+| `/scores/top?subjects=toan,vat_li, ngoai_ngu` | GET    | Get Top 10 students having highest total score with 3 subjects                       |
+| `/scores/total-candidates`                    | GET    | Get total candidates with at least one valid score                                   |
+
+---
+
+## Database Schema (Prisma)
+
+```prisma
+model Score {
+  sbd          String  @id
+  toan         Float?
+  ngu_van      Float?
+  ngoai_ngu    Float?
+  vat_li       Float?
+  hoa_hoc      Float?
+  sinh_hoc     Float?
+  lich_su      Float?
+  dia_li       Float?
+  gdcd         Float?
+  ma_ngoai_ngu String?
+}
+```
+
+---
+
+## UI Overview
+
+### Dashboard
+
+- KPI Cards: total candidates, average score, distribution summary
+- Score distribution chart per subject
+- Top 10 student leaderboard by block
+- Quick navigation: search and detailed reports
+
+### Reports
+
+- Filter by subject or block
+- Interactive charts showing 4-level score distributions
+
+---
+
+## Docker and Hosting
+
+- I'm trying to work the Docker out but got some problems with Backend, specially prisma, so I failed to host it.
+- For Database hosting, I choose [Neon](https://console.neon.tech/)
+- I've already hosted the Frontend, if you want to see [LINK](https://golden-owl-ass.vercel.app/)
+
+---
+
+## 🤝 Author
+
+**Developed by:** [Hải Trung Nguyễn](https://github.com/haitrungng)  
+**For:** _Golden Owl Asia - Web Development Internship Assignment_  
+**Tech Stack:** Full-Stack TypeScript (NestJS + Next.js + Prisma)  
+**Contact information:** **haitrungng12004@gmail.com**

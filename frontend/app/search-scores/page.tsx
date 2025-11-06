@@ -119,12 +119,12 @@ const SearchPage = () => {
               Mã ngoại ngữ: <strong>{score.ma_ngoai_ngu}</strong>
             </p>
           </div>
-          <div className='flex justify-between gap-4 pt-4'>
+          <div className='flex justify-between gap-4 pt-4 flex-wrap w-full items-center'>
             {Object.entries(score).map(
               ([subject, mark]) =>
                 subject !== 'sbd' &&
                 subject !== 'ma_ngoai_ngu' && (
-                  <div key={subject} className='flex flex-col items-center'>
+                  <div key={subject} className='flex flex-col  items-center'>
                     <span className='text-xl font-bold'>
                       {formatSubjectName(subject as Subject)}
                     </span>
