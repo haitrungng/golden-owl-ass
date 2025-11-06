@@ -23,6 +23,7 @@ import { DropdownMenuSubjects } from '@/app/reports/page';
 
 type ScorePieProps = {
   stats: ScoreDistribution | null;
+  error: string | null;
   subjectsForPie: Subject[];
   setSubjectForPie: React.Dispatch<React.SetStateAction<Subject[]>>;
 
@@ -41,6 +42,7 @@ const chartConfig = {
 
 // ---- Component chính ----
 export function ScoreDistributionPie({
+  error,
   stats,
   subjectsForPie,
   setSubjectForPie,
@@ -114,43 +116,47 @@ export function ScoreDistributionPie({
       </CardHeader>
 
       <CardContent className='flex-1 pb-0'>
-        <ChartContainer
-          config={chartConfig}
-          className='[&_.recharts-text]:fill-background mx-auto aspect-square max-h-[260px]'
-        >
-          <PieChart>
-            <ChartTooltip
-              content={
-                <ChartTooltipContent
-                  nameKey='count'
-                  formatter={(value) => {
-                    // value ở đây chính là "count" (ví dụ: 198392)
-                    const percentage =
-                      ((value as number) / totalWithScore) * 100;
-                    // Trả về chuỗi đã định dạng
-                    return `${percentage.toFixed(2)}%`;
-                  }}
-                />
-              }
-            />
-            <Pie
-              data={chartData}
-              dataKey='count'
-              nameKey='band'
-              innerRadius={20}
-              outerRadius={100}
-              stroke='none'
-              isAnimationActive
-            >
-              {/* nhãn lát bánh: chỉ hiện tên nhóm cho gọn, % hiển thị ở tooltip */}
-              <LabelList
-                dataKey='band'
-                className='fill-background'
-                fontSize={12}
+        {error ? (
+          <p className='text-center text-red-500'>Error: {error}</p>
+        ) : (
+          <ChartContainer
+            config={chartConfig}
+            className='[&_.recharts-text]:fill-background mx-auto aspect-square max-h-[260px]'
+          >
+            <PieChart>
+              <ChartTooltip
+                content={
+                  <ChartTooltipContent
+                    nameKey='count'
+                    formatter={(value) => {
+                      // value ở đây chính là "count" (ví dụ: 198392)
+                      const percentage =
+                        ((value as number) / totalWithScore) * 100;
+                      // Trả về chuỗi đã định dạng
+                      return `${percentage.toFixed(2)}%`;
+                    }}
+                  />
+                }
               />
-            </Pie>
-          </PieChart>
-        </ChartContainer>
+              <Pie
+                data={chartData}
+                dataKey='count'
+                nameKey='band'
+                innerRadius={20}
+                outerRadius={100}
+                stroke='none'
+                isAnimationActive
+              >
+                {/* nhãn lát bánh: chỉ hiện tên nhóm cho gọn, % hiển thị ở tooltip */}
+                <LabelList
+                  dataKey='band'
+                  className='fill-background'
+                  fontSize={12}
+                />
+              </Pie>
+            </PieChart>
+          </ChartContainer>
+        )}
       </CardContent>
 
       <CardFooter className='flex-col gap-2 text-sm'>

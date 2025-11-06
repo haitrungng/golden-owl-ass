@@ -35,7 +35,9 @@ export default function Home() {
         setTotalCandidates(data.totalCandidates.totalWithAnyScore);
       } catch (error) {
         console.error('Error fetching summary stats:', error);
-        setErrorFetchAve(error.message);
+        setErrorFetchAve(
+          error instanceof Error ? error.message : String(error)
+        );
       }
     }
     fetchData();

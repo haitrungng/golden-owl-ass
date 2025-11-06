@@ -156,6 +156,7 @@ const DetailPage = () => {
       </Card>
 
       <ScoreDistributionPie
+        error={fetchPieError}
         stats={scoreDistribution}
         subjectsForPie={subjectForPie}
         setSubjectForPie={setSubjectForPie}
