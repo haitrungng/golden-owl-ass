@@ -1,0 +1,30 @@
+// This is your Prisma schema file,
+// learn more about it in the docs: https://pris.ly/d/prisma-schema
+
+// Looking for ways to speed up your queries, or scale easily with your serverless or edge functions?
+// Try Prisma Accelerate: https://pris.ly/cli/accelerate-init
+
+generator client {
+  provider = "prisma-client-js"
+  output   = "../generated"
+}
+
+datasource db {
+  provider = "postgresql"
+  url      = env("DATABASE_URL")
+}
+
+model Score {
+  sbd String @id
+
+  toan         Float? // nullable
+  ngu_van      Float?
+  ngoai_ngu    Float?
+  vat_li       Float?
+  hoa_hoc      Float?
+  sinh_hoc     Float?
+  lich_su      Float?
+  dia_li       Float?
+  gdcd         Float?
+  ma_ngoai_ngu String?
+}
